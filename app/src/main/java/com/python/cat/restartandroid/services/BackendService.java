@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.apkfuns.logutils.LogUtils;
+import com.python.cat.restartandroid.utils.Common;
 import com.python.cat.restartandroid.utils.NotificationTools;
 
 public class BackendService extends Service {
@@ -63,6 +65,8 @@ public class BackendService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtils.d(intent + " , " + flags + " , " + startId);
+        LocalBroadcastManager.getInstance(this)
+                .sendBroadcast(new Intent(Common.INNERACTION));
         return super.onStartCommand(intent, flags, startId);
     }
 

@@ -2,6 +2,7 @@ package com.python.cat.restartandroid;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -72,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
     private void click2sendNotification(View viewById) {
         Notification notification = NotificationTools
                 .builder(mNotificationManager, this.getApplicationContext())
+                .setContentIntent(PendingIntent
+                        .getForegroundService(this,
+                                0,new Intent(MainActivity.this,
+                                        BackendService.class),0))
                 .build();
         viewById.setOnClickListener((v) -> {
             LogUtils.w("view click...");
