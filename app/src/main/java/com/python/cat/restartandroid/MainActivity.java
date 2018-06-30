@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.apkfuns.logutils.LogUtils;
+import com.python.cat.restartandroid.services.BackendService;
 import com.python.cat.restartandroid.utils.NotificationTools;
 import com.python.cat.restartandroid.utils.NotificationUtils;
 
@@ -31,8 +32,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        View viewById = findViewById(R.id.show_notification);
+        View btnSendNotification = findViewById(R.id.show_notification);
+        View btnStartService = findViewById(R.id.start_service);
+        clickView(btnSendNotification);
 
+
+        btnStartService
+                .setOnClickListener(v -> {
+                            LogUtils.w("click 2 start service...");
+                            startService(new Intent(MainActivity.this,
+                                    BackendService.class));
+                        }
+                );
+
+    }
+
+    private void clickView(View viewById) {
         Notification notification = NotificationTools
                 .builder(mNotificationManager, this.getApplicationContext())
                 .build();
@@ -41,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
             channelId = notification.getChannelId();
             mNotificationManager.notify(1, notification);
         });
-
     }
 
     @Override

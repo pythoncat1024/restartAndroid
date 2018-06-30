@@ -16,7 +16,6 @@ import com.python.cat.restartandroid.R;
 
 /**
  * Created by cat on 2018/6/29.
- *
  */
 
 @TargetApi(Build.VERSION_CODES.O)
@@ -51,7 +50,7 @@ public class NotificationTools {
 
 // 为该通知设置一个id
         int notifyID = 1;
-    // 通知渠道的id
+        // 通知渠道的id
 // Create a notification and set the notification channel.
         return new Notification.Builder(context, mChannel.getId())
                 .setContentTitle("通知来了")
@@ -61,3 +60,6 @@ public class NotificationTools {
 
     }
 }
+
+
+
