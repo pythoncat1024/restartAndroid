@@ -15,17 +15,17 @@ import android.widget.Toast;
 
 import com.apkfuns.logutils.Constant;
 import com.apkfuns.logutils.LogUtils;
+import com.python.cat.restartandroid.base.BaseActivity;
 import com.python.cat.restartandroid.services.BackendService;
 import com.python.cat.restartandroid.utils.Common;
 import com.python.cat.restartandroid.utils.NotificationTools;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private NotificationManager mNotificationManager;
 
     private String channelId;
     private InnerBroadcastReceiver receiver;
-    private IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 getSystemService(Context.NOTIFICATION_SERVICE);
 
         receiver = new InnerBroadcastReceiver();
-        intentFilter = new IntentFilter();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Common.INNERACTION);
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(receiver, intentFilter);
@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         click2sendNotification(btnSendNotification);
         click2startService(btnStartService);
         click2sendBroadcast(btnSendBroadcast);
+
+
+        findViewById(R.id.btn_next).setOnClickListener(v -> {
+            LogUtils.v("click...");
+            startActivity(new Intent(get(), RabbitActivity.class));
+        });
 
     }
 
@@ -75,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 .builder(mNotificationManager, this.getApplicationContext())
                 .setContentIntent(PendingIntent
                         .getForegroundService(this,
-                                0,new Intent(MainActivity.this,
-                                        BackendService.class),0))
+                                0, new Intent(MainActivity.this,
+                                        BackendService.class), 0))
                 .build();
         viewById.setOnClickListener((v) -> {
             LogUtils.w("view click...");
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             LogUtils.w("receive action: " + action);
 
             Toast.makeText(MainActivity.this,
-                    "收到广播了...",Toast.LENGTH_SHORT).show();
+                    "收到广播了...", Toast.LENGTH_SHORT).show();
         }
     }
 }

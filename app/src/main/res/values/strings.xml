@@ -3,4 +3,5 @@
     <string name="send_notification">发出通知</string>
     <string name="start_service">启动服务</string>
     <string name="send_broadcast">发送广播</string>
+    <string name="next">下一个</string>
 </resources>
