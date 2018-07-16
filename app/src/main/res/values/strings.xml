@@ -4,4 +4,5 @@
     <string name="start_service">启动服务</string>
     <string name="send_broadcast">发送广播</string>
     <string name="next">下一个</string>
+    <string name="sub_thread">sub thread</string>
 </resources>
